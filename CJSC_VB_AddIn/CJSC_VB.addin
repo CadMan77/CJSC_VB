@@ -1,0 +1,10 @@
+﻿<Addin Type="Standard">
+	<ClassId>{FDF39F00-2EF3-45BF-BFE3-709AEA43B660}</ClassId>
+	<ClientId>{FDF39F00-2EF3-45BF-BFE3-709AEA43B660}</ClientId>
+	<DisplayName>Cross-Cutter</DisplayName>
+	<Description Language="1033">Automatic Cross Joint Slot Cutter</Description>
+	<Description Language="1049">Автоматический просекатель пазов для крест-соединений</Description>
+	<Assembly>CJSC_VB.dll</Assembly>
+	<LoadBehavior>1</LoadBehavior>
+	<SupportedSoftwareVersionGreaterThan>24..</SupportedSoftwareVersionGreaterThan>
+</Addin>
