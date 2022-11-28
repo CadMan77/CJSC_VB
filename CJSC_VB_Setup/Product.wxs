@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <!-- ________________________________________ -->
+  <!--|                                        |-->
+  <!--|        Installer Configuration         |-->
+  <!--|                                        |-->
+
+  <!-- Product name as you want it to appear in Add/Remove Programs-->
+  <!--TODO: Replace ADD_REMOVE_PROGRAMS_NAME with display name as you want it to appear in Add/Remove Programs-->
+  <?define ProductName = "CJSC_VB Addin" ?>
+
+  <!-- AddIn Name - Name of the installed addin main DLL-->
+  <!--TODO: Replace MAIN_ADDIN_FILE_WITHOUT_EXTENSION with referenced project main dll name (without extension)-->
+  <?define MainAddinFile = "CJSC_VB" ?>
+
+  <!--Installed product output folder-->
+  <!--TODO: Replace REFERENCED_PROJECT_NAME with name of the referenced installed project-->
+  <?define targetDir = $(var.CJSC_VB.TargetDir)?>
+
+  <!--|                                        |-->
+  <!--|     End of Installer Configuration     |-->
+  <!--|________________________________________|-->
+
+
+  <?if $(var.Platform) = x64 ?>
+  <!--<?define ProductName = "CJSC_VB_Setup" ?>-->
+  <?define Win64 = "yes" ?>
+  <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+  <?else ?>
+  <!--<?define ProductName = "CJSC_VB_Setup" ?>-->
+  <?define Win64 = "no" ?>
+  <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?endif ?>
+
+  <!--Upgrade code-->
+  <?define UpgradeCode = "{0df513e7-aa0e-414f-89c3-b805375defc4}" ?>
+
+  <!--Version - Can be replaced with fixed string i.e. 1.0.0.0-->
+  <?define Version = "!(bind.fileVersion.$(var.MainAddinFile).dll)" ?>
+  <Product
+    Id="*"
+    UpgradeCode="$(var.UpgradeCode)"
+
+    Name="$(var.ProductName)"
+    Version="$(var.Version)"
+    Manufacturer="Arkance Systems"
+    Language="1029"
+    Codepage="1250"
+       >
+    
+    <Package InstallerVersion="200" AdminImage="no" SummaryCodepage="1250" InstallPrivileges="elevated" Compressed="yes"  InstallScope="perMachine" />
+
+    <Media Id="1" Cabinet="AddIn.cab" CompressionLevel="mszip" EmbedCab="yes"/>
+
+    <!--Uninstall older vesions-->
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.Version)" IncludeMinimum="no" OnlyDetect="yes" Property="NEWERVERSIONDETECTED" />
+      <UpgradeVersion Minimum="0.0.0" Maximum="$(var.Version)" IncludeMinimum="yes" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
+    </Upgrade>
+
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+      <Custom Action="NewerVersion" After="FindRelatedProducts">NEWERVERSIONDETECTED</Custom>
+    </InstallExecuteSequence>
+
+    <CustomAction Id="NewerVersion" Error="A later version of [ProductName] is already installed." />
+
+    <!--Installed components and features-->
+    <Feature Id="ProductFeature" Title="CJSC_VB_Setup" Level="1" >
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+    <!--User interface-->
+    <UIRef Id="WixUI_Minimal"/>
+    <!--<UIRef Id="WixUI_InstallDir" />-->
+    <!--<UIRef Id="WixUI_ErrorProgressText" />-->
+    <!-- Overrides for the default set of library images -->
+    <WixVariable Id="WixUIBannerBmp" Value="Binaries\Banner.jpg" />
+    <WixVariable Id="WixUIDialogBmp" Value="Binaries\Dialog.jpg" />
+    <!--<WixVariable Id="WixUIExclamationIco" Value="Binary\Warning.ico" />-->
+    <!--<WixVariable Id="WixUIInfoIco" Value="Binary\Info.ico" />-->
+    <!--<WixVariable Id="WixUINewIco" Value="Binary\NewFolder.ico" />-->
+    <!--<WixVariable Id="WixUIUpIco" Value="Binary\UpFolder.ico" />-->
+    <WixVariable Id="WixUILicenseRtf" Value="Binaries\EULA.rtf" />
+
+    <!--Add Remove programs icon-->
+    <Icon Id="icon.ico" SourceFile="Binaries\AddIn.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
+  </Product>
+
+
+  <Fragment>
+    <!--Folder structure-->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+
+       <!--INSTALLFOLDER-->
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="ManufacturerFolder" Name="Autodesk">
+          <Directory Id="ApplicationPluginsFolder" Name="ApplicationPlugins">
+            <Directory Id="INSTALLFOLDER" Name="$(var.MainAddinFile).bundle" >
+              <Directory Id="csCZ" Name="cs-CZ"/>
+              <Directory Id ="Lms" Name="LMS"/>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" >
+
+      <!--AddIn files-->
+      <Component Id="$(var.MainAddinFile).dll" Directory="INSTALLFOLDER">
+        <File Source="$(var.targetDir)\$(var.MainAddinFile).dll"/>
+      </Component>
+
+      <!--Localization files (Optional)-->
+      <!--<Component Id="$(var.MainAddinFile).resources.dll" Directory="csCZ">
+        <File Source="$(var.targetDir)\cs-CZ\$(var.MainAddinFile).resources.dll"/>
+      </Component>-->
+
+      <!--AddIn registration manifest-->
+      <Component Id="AddInLoaderAll" Directory="INSTALLFOLDER">
+        <File Id="ADDINFILEALL" Source="$(var.targetDir)\$(var.MainAddinFile).addin"/>
+      </Component>
+
+    </ComponentGroup>
+  </Fragment>
+
+</Wix>
