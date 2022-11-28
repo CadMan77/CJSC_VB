@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32929.386
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CJSC_VB", "CJSC_VB_AddIn\CJSC_VB.vbproj", "{9BCB6900-C32B-4614-883B-AB6DF047D0BE}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "CJSC_VB_Setup", "CJSC_VB_Setup\CJSC_VB_Setup.wixproj", "{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,26 @@ Global
 		{9BCB6900-C32B-4614-883B-AB6DF047D0BE}.Release|x64.ActiveCfg = Debug|Any CPU
 		{9BCB6900-C32B-4614-883B-AB6DF047D0BE}.Release|x86.ActiveCfg = Release|Any CPU
 		{9BCB6900-C32B-4614-883B-AB6DF047D0BE}.Release|x86.Build.0 = Release|Any CPU
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Debug|Any CPU.Build.0 = Debug|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Debug|ARM.ActiveCfg = Debug|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Debug|ARM.Build.0 = Debug|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Debug|ARM64.ActiveCfg = Debug|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Debug|ARM64.Build.0 = Debug|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Debug|x64.ActiveCfg = Debug|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Debug|x64.Build.0 = Debug|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Debug|x86.ActiveCfg = Debug|x86
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Debug|x86.Build.0 = Debug|x86
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Release|Any CPU.ActiveCfg = Release|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Release|Any CPU.Build.0 = Release|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Release|ARM.ActiveCfg = Release|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Release|ARM.Build.0 = Release|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Release|ARM64.ActiveCfg = Release|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Release|ARM64.Build.0 = Release|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Release|x64.ActiveCfg = Release|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Release|x64.Build.0 = Release|x64
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Release|x86.ActiveCfg = Release|x86
+		{CB70DC25-AF6D-441D-B6FC-1CD54FE97F47}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
